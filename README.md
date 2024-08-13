@@ -1,8 +1,4 @@
 # Introduction to Git
-Git is a powerful and widely-used distributed version control system that has transformed the way developers manage and collaborate on software projects. Created by Linus Torvalds in 2005 (cuz he was sick of greedy corps lol), Git allows teams to track changes in their codebase, manage multiple versions of their projects, and facilitate collaboration among developers, regardless of their geographical location.
-At its core, Git provides a robust framework for recording changes to files, enabling users to revert to previous versions, compare changes over time, and work concurrently on different features or bug fixes through branching. Unlike traditional centralised version control systems, Git operates on a distributed model, meaning that every developer has a complete copy of the repository, including its entire history. This feature not only enhances performance but also allows for offline work, empowering developers to commit changes locally before pushing them to a shared repository.
-Git's flexibility and efficiency make it an essential tool for modern software development. Its ability to handle large projects with numerous contributors while maintaining a clear history of changes has made it the go-to choice for developers worldwide. As you dive deeper into Git, you will discover its myriad features, including staging, merging, and conflict resolution, which further enhance collaboration and streamline the development process. Understanding Git is crucial for any developer looking to improve their workflow and contribute effectively to team projects.
-
 In this note i’ll get in details about Version Control Systems and git, since you know… i kinda really need to understand this shit.
 One thing to note is that modern version control like Git have not only just the latest **snapshots** (your latest code), but the whole repository mirrored, with all the changes, with all the versions of the code, so when people work in a project, every post is a full backup with the *version database*. And you can setup different types of collaborations with different group by setting up **workflows** or **branches**. 
 
@@ -57,5 +53,60 @@ You can have a bunch of infos about yourself in the `.gitconfig` file in your sy
 git config --list
 ```
 
+# Git Basics
+
+To initialise your project, you can either take and existing project, and then import it into git, or, clone an existing Git repo from another server, here is how you do it respectively:
+
+```bash
+git init
+```
+
+this one will create the `/.git` subdirectory, If your project includes large files or binary assets, they are stored as blobs in the `.git` directory, increasing its size. and to start version controlling your files, you just need to add them to the staging area, then commit them, let’s for example stage then commit all the `.c` files in your already existing project
+
+```bash
+git add *.c
+git add LISCENCE
+git commit -m 'first commit/first project version'
+```
+
+Now you have a new repo with tracked files, you can, also, clone an exiting repo using
+
+```bash
+git clone url optional_name
+```
+
+The `url` could be something like [https://github.com/Username/Reponame.git][1] This will not only copy the existing working directory, but all the data the server has, with all the versions of the files and all the history, all *by default*. So if your version gets corrupted or the server goes down, you can use any clone of that repo to restore it (minus some server-side hooks which idk what they are), note that git ignores **untracked** files, so you need to add them first so that it would be able to determine if they have been modified or not
+
+```bash
+Untracked     Unmodified     Modified       Staged
+   |              |              |             |
+   |              |              |             |
+   |---> Add the file ------------------------>|
+   |              |              |             |
+   |              |--> Edit ---->|             |
+   |              |              |             |
+   |<- Remove <---|              |             |
+   |              |              |             |
+   |              |              |--> Stage -->|
+   |              |              |             |
+   |              |              |             |
+   |              |<--------- Commit ----------|
+```
+
+The untracked files will not be included in the next commits until you explicitly tell git to do so …the command `git status` lets you see the state of your files in the project, here’s the output of this project (in french lol)
+
+```bash
+git status
+Sur la branche main
+Votre branche est à jour avec 'origin/main'.
+
+Modifications qui ne seront pas validées :
+  (utilisez "git add <fichier>..." pour mettre à jour ce qui sera validé)
+  (utilisez "git restore <fichier>..." pour annuler les modifications dans le répertoire de travail)
+	modifié :         README.md
+
+aucune modification n'a été ajoutée à la validation (utilisez "git add" ou "git commit -a")
+```
 
 
+[1]:	https://github.com/RahanBenabid/Learning-Backend.git
