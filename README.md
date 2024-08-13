@@ -15,7 +15,9 @@ And everything is local, the entire history of the project is there with you, so
 ### Checksum
 Git uses checksum , When you store files in Git, it calculates a checksum for each file and uses that checksum to refer to the file's contents. This checksum is like a digital fingerprint that ensures the integrity of your files. If a file's contents change, even slightly, the checksum will be different. This allows Git to quickly detect any changes or corruptions in your files. Checksums are an essential part of Git's internal workings, ensuring the reliability and consistency of your project's history over time. Git stores everything in its database using hashed content (SHA-1), which looks something like:
 
-	24b9da6552252987aa493b52f8696cd6d3b00373
+```swift
+24b9da6552252987aa493b52f8696cd6d3b00373
+```
 
 Git is also very secure, and can rarely do something that is undoable, like deleting stuff.
 ### States
@@ -23,3 +25,37 @@ Git files has three main states: *committed, modified, staged*
 1. **Staged**: the file is safely stared in the local database
 2. **Modified**: there is some modified change that has not been committed
 3. **Staged**: the modified file has been marked and ready to go into the next commit snapshot
+
+Here is the Git folders:
+- the `/.git` directory is where the *metadata* and *object database* are stored, this is what is copied when a repo is cloned in your computer 
+- the **Working** directory, is the local directory on your computer where your project files are stored. This is where you can view, edit, and manage your files before they are committed to the Git repository.
+- the staging area, contained (generally) in the `/.git` directory, contains info about the next commit, also called `index`, 
+
+```swift
++---------------------+
+| Working Directory   |
+| (Modify Files)      |
++----------+----------+
+           |
+           v
++---------------------+
+| Staging Area        |
+| (Stage Files)       |
++----------+----------+
+           |
+           v
++---------------------+
+| Git Repository      |
+| (Commit Changes)    |
++---------------------+
+```
+
+to put it simple if the file is in the `./git` directory then it’s ** committed**, if it’s in the staging area, it’s staged, if it’s modified but in neither places, it’s modified.
+You can have a bunch of infos about yourself in the `.gitconfig` file in your system’s root directory, it contains a bunch of infos, to display them, just write
+
+```bash
+git config --list
+```
+
+
+
