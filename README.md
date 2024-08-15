@@ -93,10 +93,11 @@ Untracked     Unmodified     Modified       Staged
    |              |<--------- Commit ----------|
 ```
 
+#### Check the project state
 The untracked files will not be included in the next commits until you explicitly tell git to do so …the command `git status` lets you see the state of your files in the project, here’s the output of this project (in french lol)
 
-```bash
-git status
+```
+$ git status
 Sur la branche main
 Votre branche est à jour avec 'origin/main'.
 
@@ -105,8 +106,103 @@ Modifications qui ne seront pas validées :
   (utilisez "git restore <fichier>..." pour annuler les modifications dans le répertoire de travail)
 	modifié :         README.md
 
-aucune modification n'a été ajoutée à la validation (utilisez "git add" ou "git commit -a")
+aucune modification n\'a été ajoutée à la validation (utilisez "git add" ou "git commit -a")
 ```
 
+In case there wouldn’t be modifications, this would show up instead
+
+```bash
+$ git status
+On branch master
+nothing to commit, working directory clean
+```
+
+So any modification would result in the first state being shown instead, which means git sees you have a file *you didn’t have in the previous snapshot (commit)*, now let’s create an new file which will be untracked and then start tracking it
+
+```bash
+$ touch new_file.txt
+$ git add new_file
+```
+
+Now, if you commit, the version you had at the point of running `git add` is what will be included in the next snapshot, in other hands: `git add` is used for **tracking new files**, **staging existing files** and we’ll see later, **marking merge-conflicted files as resolved**.
+After staging, you end up modifying a file you already staged, it will be **marked as both staged and unstaged**, so to solve that, you need to run `git add <file>` again so that you commit the latest changes you made. Also here’s a better way to check
+
+```bash
+# for a more readable output
+$ git status -s
+M README. md	# modified files
+MM Rakefile	
+A lib/git.rb	# new files that have been added
+M lib/simplegit.rb	
+?? LICENSE.txt	# not tracked
+```
+
+#### Ignoring Files
+Some projects have large files or system/temporary files that can be disposed of (don’t need to be tracked), the perfect example is the `/node_modules` folder, for that you need to add it to the list inside of the `.gitignore` file inside your project. the file had a bunch of patterns
+
+```bash
+$ cat .gitignore
+*.[oa]
+*~
+```
+
+this tell Git to ignore any files ending in “.o” or “.a”. here is a more complete `.gitignore` file:
+
+```bash
+# a comment - this is ignored
+*.a # no .a files
+!lib.a # but do track lib.a, even though you're ignoring .a files above
+/TODO # only ignore the root TODO file, not subdir/TODO
+build/ # ignore all files in the build/ directory
+doc/*.txt # ignore doc/notes.txt, but not doc/server/arch.txt
+```
+
+too see the changes just type
+
+````bash
+$ git diff
+
+diff --git a/README.md b/README.md
+index 032451a..1813333 100644
+--- a/README.md
++++ b/README.md
+@@ -93,10 +93,11 @@ Untracked     Unmodified     Modified       Staged
+    |              |<--------- Commit ----------|
+ ```
+
++#### Check the project state
+ The untracked files will not be included in the next commits until you explicitly tell git to do so …the command `git status` lets you see the state of your files in the project, here’s the output of this project (in french lol)
+
+-```bash
+-git status
++```
++$ git status
+ Sur la branche main
+ Votre branche est à jour avec 'origin/main'.
+
+@@ -105,7 +106,55 @@ Modifications qui ne seront pas validées :
+   (utilisez "git restore <fichier>..." pour annuler les modifications dans le répertoire de travail)
+        modifié :         README.md
+
+-aucune modification n'a été ajoutée à la validation (utilisez "git add" ou "git commit -a")
++aucune modification n\'a été ajoutée à la validation (utilisez "git add" ou "git commit -a")
++```
++
++In case there wouldn’t be modifications, this would show up instead
++
++```bash
++$ git status
++On branch master
++nothing to commit, working directory clean
++```
++
++So any modification would result in the first state being shown instead, which means git sees you have a file *
+````
+
+and to see what you staged and what will go to your next commit
+
+```bash
+
+```
 
 [1]:	https://github.com/RahanBenabid/Learning-Backend.git
