@@ -131,7 +131,7 @@ After staging, you end up modifying a file you already staged, it will be **mark
 # for a more readable output
 $ git status -s
 M README. md	# modified files
-MM Rakefile	
+MM Rakefile		# staged and modified again
 A lib/git.rb	# new files that have been added
 M lib/simplegit.rb	
 ?? LICENSE.txt	# not tracked
@@ -199,10 +199,21 @@ index 032451a..1813333 100644
 +So any modification would result in the first state being shown instead, which means git sees you have a file *
 ````
 
+> this however only shows changes that are unstaged, not all the changes made since the last commit, so if you stage then modify again, it can get confusing
 and to see what you staged and what will go to your next commit
 
 ```bash
+git diff --staged
 
+# same long output as the last command
 ```
+
+Now, after all this BS, you should be ready to commit, because any file you didn’t stage/track will not be included in the commit. so check twice by running `git status` or `git status -s` again, now let’s commit
+
+```bash
+git commit
+```
+
+this will pop the editor you chose 
 
 [1]:	https://github.com/RahanBenabid/Learning-Backend.git
