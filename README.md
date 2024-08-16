@@ -249,7 +249,7 @@ git rm --cached README
 you can rename files in git using the `mv` command
 
 ```bash
-git mv file_from file_to
+$ git mv file_from file_to
 
 $ git mv README.md README
 $ git status
@@ -271,7 +271,8 @@ git add README
 using the `git log` command, you can see the commit history for your project
 
 ```bash
-git log
+$ git log
+
 commit 3a66df9c3d63db9b5c2ad40d1d3867de9d5b2e0a (HEAD -> main)
 Author: RahanBenabid <rahannadime@gmail.com>
 Date:   Thu Aug 15 20:51:54 2024 +0100
@@ -314,7 +315,8 @@ commit 6eec0d3db0e8086e47cd77d6b42959c81008fce8
 This logs them in chronological order, and adding the `-p` flag, you can see the changes that have been made, for better readability, it’s best to use the `--pretty` flag
 
 ```bash
-git log --pretty=oneline
+$ git log --pretty=oneline
+
 3a66df9c3d63db9b5c2ad40d1d3867de9d5b2e0a (HEAD -> main) commit directly from the terminal
 8f2c54300893427b85cb7fb74ac08f707f3c99b1 testing the commit thingy with VIM... yay
 c76f10014dbf2ce98a7523bbf666aaeab6193cfa (origin/main) small bonus notes
@@ -324,27 +326,30 @@ c5f3785c72aa74c8fd2bbdaa170d42d762c77d9d Some key Git aspects
 6eec0d3db0e8086e47cd77d6b42959c81008fce8 first commit, intro to Git
 ```
 
-Option Description of Output
-%H Commit hash
-%h Abbreviated commit hash
-%T Tree hash
-%t Abbreviated tree hash
-%P Parent hash
-%p Abbreviated parent hash
-%an Author name
-%ae Author e-mail
-%ad Author date (format respects the –date= option
-%ar Author date, relative
-%cn Committer name
-%ce Committer e-mail
-%cd Committer date
-%cr Committer date, relative
-%s Subject
+| Option | Description of Output                           |
+| ------ | ----------------------------------------------- |
+| `%H`   | Commit hash                                     |
+| `%h`   | Abbreviated commit hash                         |
+| `%T`   | Tree hash                                       |
+| `%t`   | Abbreviated tree hash                           |
+| `%P`   | Parent hash                                     |
+| `%p`   | Abbreviated parent hash                         |
+| `%an`  | Author name                                     |
+| `%ae`  | Author e-mail                                   |
+| `%ad`  | Author date (format respects the –date= option) |
+| `%ar`  | Author date, relative                           |
+| `%cn`  | Committer name                                  |
+| `%ce`  | Committer e-mail                                |
+| `%cd`  | Committer date                                  |
+| `%cr`  | Committer date, relative                        |
+| `%s`   | Subject                                         |
+
 
 The difference between the author and committer, is that the author is the one who wrote the work, and the committer is the one who last applied the work, so both persons get credit, you can even turn it into a file tree
 
 ```bash
-git log --pretty=format:"%h %s" --graph
+$ git log --pretty=format:"%h %s" --graph
+
 * 4f1d57c Delete, update acronyms/create, see categories
 * b4995ff Added bootstrap, users
 * 362f6e4 Added Leaf to the project
@@ -376,6 +381,35 @@ git log --pretty=format:"%h %s" --graph
 * 2499cfd added a REAMDE
 * be5a3fa Generate Vapor project.
 ```
+
+#### Undoing 
+Here is how you can undo so however, you can’t undo anything, but here, for example, in case you commit early
+
+```bash
+git commit -amend
+```
+
+if you run this after your last commit without modification, it will only **change your commit message**,  but in this case, you end up modifying your last commit
+
+```bash
+git commit -m 'initial commit'
+git add forgotten_file
+git commit --amend
+```
+
+you can also undo your *staging*
+
+```bash
+git reset HEAD README.md
+```
+
+what about unundoing? you wanna revert to your file before you modified it, like the previous snapshot
+
+```bash
+git checkout -- README.md
+```
+
+it’s a dangerous command, since any changes made to it will be **GONE**
 
 
 [1]:	https://github.com/RahanBenabid/Learning-Backend.git
