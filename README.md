@@ -326,6 +326,7 @@ c5f3785c72aa74c8fd2bbdaa170d42d762c77d9d Some key Git aspects
 6eec0d3db0e8086e47cd77d6b42959c81008fce8 first commit, intro to Git
 ```
 
+
 | Option | Description of Output                           |
 | ------ | ----------------------------------------------- |
 | `%H`   | Commit hash                                     |
@@ -345,6 +346,7 @@ c5f3785c72aa74c8fd2bbdaa170d42d762c77d9d Some key Git aspects
 | `%s`   | Subject                                         |
 
 
+
 The difference between the author and committer, is that the author is the one who wrote the work, and the committer is the one who last applied the work, so both persons get credit, you can even turn it into a file tree
 
 ```bash
@@ -355,7 +357,7 @@ $ git log --pretty=format:"%h %s" --graph
 * 362f6e4 Added Leaf to the project
 * af51b37 Creating categories/adding categories to acronyms
 * d997cbc Acronyms can be deleted and edited in the app
-* 84adb9e didn\'t stage everything
+* 84adb9e didnt stage everything
 * e23fa19 added the ability to visit the Acronyms
 * 1375fdb modified some files and added comments
 * ba2cdf3 Added a whole iOS interface
@@ -372,7 +374,7 @@ $ git log --pretty=format:"%h %s" --graph
 *   4dab4f0 Merge branch 'main' of https://github.com/RahanBenabid/TILApp
 |\
 | * b672bed added CRUD operations
-* | 6d208ff I\'m so done with life
+* | 6d208ff Im so done with life
 * | 5edeb4d working with fork, hope it works
 * | 59274b8 added CRUD operations
 |/
@@ -410,6 +412,7 @@ git checkout -- README.md
 ```
 
 it’s a dangerous command, since any changes made to it will be **GONE**
+
 
 
 [1]:	https://github.com/RahanBenabid/Learning-Backend.git
